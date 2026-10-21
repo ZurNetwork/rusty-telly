@@ -1,0 +1,65 @@
+{
+  "path": "crates/application/src",
+  "charted": "2026-10-20",
+  "short": "use cases, Session, Edition, Ports and the registry",
+  "is": "The engine's source: the use-case namespaces (auth, chat, message), the Session and its Edition, the Ports bag, and the commands registry.",
+  "type": "code",
+  "tags": [
+    "category:source"
+  ],
+  "conventions": [
+    "A use case is a plain `pub async fn` taking an XQuery or XCommand and its ports as `&dyn Port`, returning a flat XResult struct or UseCaseError.",
+    "A use case never takes the Session; the Session calls use cases and holds the only mutable state."
+  ],
+  "entry_points": [
+    "lib.rs"
+  ],
+  "fs": [
+    {
+      "name": "auth/",
+      "role": "status: whether a login is held",
+      "node": false
+    },
+    {
+      "name": "chat/",
+      "role": "open: resolve a ChatRef among the dialogs, refuse broadcast channels",
+      "node": false
+    },
+    {
+      "name": "commands/",
+      "role": "the command registry",
+      "node": true
+    },
+    {
+      "name": "edition.rs",
+      "role": "Edition: limited | full; tests in edition/",
+      "node": false
+    },
+    {
+      "name": "errors.rs",
+      "role": "UseCaseError",
+      "node": false
+    },
+    {
+      "name": "lib.rs",
+      "role": "crate façade",
+      "node": false
+    },
+    {
+      "name": "message/",
+      "role": "recent and send",
+      "node": false
+    },
+    {
+      "name": "ports.rs",
+      "role": "Ports: one `Rc<dyn …>` per port, `From<Rc<Adapter>>` for an adapter serving all",
+      "node": false
+    },
+    {
+      "name": "session.rs",
+      "role": "Session: Limited (fixed to its spawned chat, resolved on first use) or Full; tests in session/",
+      "node": false
+    }
+  ],
+  "notes": []
+}

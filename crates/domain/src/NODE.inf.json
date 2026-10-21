@@ -1,0 +1,45 @@
+{
+  "path": "crates/domain/src",
+  "charted": "2026-10-20",
+  "short": "elements and ports",
+  "is": "The domain's source: `elements` holds the nouns as plain values, and `ports` holds the traits they are served through.",
+  "type": "code",
+  "tags": [
+    "category:source"
+  ],
+  "conventions": [
+    "Ports are `#[async_trait(?Send)]`: in the browser no future is Send, so no port may require it.",
+    "A port method returns `Result<_, PortError>`."
+  ],
+  "entry_points": [
+    "lib.rs"
+  ],
+  "fs": [
+    {
+      "name": "elements.rs",
+      "role": "façade re-exporting every value type",
+      "node": false
+    },
+    {
+      "name": "elements/",
+      "role": "the value types: chat, message, user",
+      "node": true
+    },
+    {
+      "name": "lib.rs",
+      "role": "crate façade: `pub mod elements; pub mod ports;`",
+      "node": false
+    },
+    {
+      "name": "ports.rs",
+      "role": "façade re-exporting the port traits, AuthStatus and PortError",
+      "node": false
+    },
+    {
+      "name": "ports/",
+      "role": "one file per port (authorization, dialogs, history, outbox) plus errors.rs (PortError: SignedOut, ChatNotFound, Transport)",
+      "node": false
+    }
+  ],
+  "notes": []
+}

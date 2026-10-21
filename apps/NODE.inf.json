@@ -1,0 +1,40 @@
+{
+  "path": "apps",
+  "charted": "2026-10-20",
+  "short": "the UIs: thin composition roots over the command engine",
+  "is": "The three binaries that drive the core: each picks its adapters, builds a Session for its edition and runs commands through `application::commands::dispatch`.",
+  "type": "code",
+  "tags": [
+    "category:ui",
+    "category:source"
+  ],
+  "conventions": [
+    "An app is a composition root: the only place an adapter is chosen.",
+    "An app reaches the core through `Session` and `commands::dispatch`, never a port directly."
+  ],
+  "entry_points": [
+    "cli/src/main.rs",
+    "mini/src/main.rs",
+    "rusty/src/main.rs"
+  ],
+  "fs": [
+    {
+      "name": "cli/",
+      "role": "command-line UI: a Full session over adapter-mem's demo account, one `<id> [json]` command per stdin line",
+      "node": false
+    },
+    {
+      "name": "mini/",
+      "role": "Unofficial Mini Telegram, the Limited UI for wasm32: a stub until its toolkit is chosen",
+      "node": false
+    },
+    {
+      "name": "rusty/",
+      "role": "Unofficial Rusty Telegram, the Full desktop UI: a beta stub",
+      "node": false
+    }
+  ],
+  "notes": [
+    "mini is linted for wasm32-unknown-unknown with domain and application (`just wasm`), so the core stays browser-safe."
+  ]
+}

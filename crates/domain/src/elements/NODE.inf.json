@@ -1,0 +1,37 @@
+{
+  "path": "crates/domain/src/elements",
+  "charted": "2026-10-20",
+  "short": "the value types: chat, message, user",
+  "is": "The leaves of the domain model, one module per noun.",
+  "type": "code",
+  "tags": [
+    "category:source",
+    "category:schema"
+  ],
+  "conventions": [
+    "Domain primitives are newtypes: wrapping is a derived `From`, reads go through a named accessor (`as_i64()`) or `AsRef<str>`, never `Deref`.",
+    "A validated newtype parses by hand through `TryFrom<String>` plus a delegating `TryFrom<&str>`.",
+    "Enum string tables derive strum's Display, EnumString, IntoStaticStr and VariantArray (snake_case), with the tokens pinned by a literal test."
+  ],
+  "entry_points": [],
+  "fs": [
+    {
+      "name": "chat/",
+      "role": "ChatId, ChatKind (and may_open), ChatRef (the untrusted spawn reference), ChatTitle, Chat",
+      "node": false
+    },
+    {
+      "name": "message/",
+      "role": "MessageId, MessageText (not blank, at most 4096 UTF-16 units), MessageTextError, Message",
+      "node": false
+    },
+    {
+      "name": "user/",
+      "role": "UserId",
+      "node": false
+    }
+  ],
+  "notes": [
+    "A ChatRef never carries an access hash: those are per account and per login session."
+  ]
+}

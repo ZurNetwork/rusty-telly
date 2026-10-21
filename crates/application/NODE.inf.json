@@ -1,0 +1,29 @@
+{
+  "path": "crates/application",
+  "charted": "2026-10-20",
+  "short": "the command engine",
+  "is": "The application crate: use cases over the domain's ports, the Session a UI drives, and the edition-filtered command registry.",
+  "type": "code",
+  "tags": [
+    "category:source"
+  ],
+  "conventions": [
+    "No normal dependency on an adapter; adapter-mem is a dev-dependency for tests only."
+  ],
+  "entry_points": [
+    "src/lib.rs"
+  ],
+  "fs": [
+    {
+      "name": "Cargo.toml",
+      "role": "dependencies: domain, serde_json, strum, thiserror; dev: adapter-mem, pollster",
+      "node": false
+    },
+    {
+      "name": "src/",
+      "role": "use cases, Session, Edition, Ports and the registry",
+      "node": true
+    }
+  ],
+  "notes": []
+}

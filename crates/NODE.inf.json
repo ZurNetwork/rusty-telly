@@ -1,0 +1,36 @@
+{
+  "path": "crates",
+  "charted": "2026-10-20",
+  "short": "the core: domain, command engine and adapters",
+  "is": "The library crates: the pure-data domain with its ports, the application command engine over them, and the adapters that implement the ports.",
+  "type": "code",
+  "tags": [
+    "category:source"
+  ],
+  "conventions": [
+    "A module's top file (`foo.rs`, never `foo/mod.rs`) is a façade: the `//!` doc, the `mod` lines and the `pub use`; its `foo/` directory holds the leaves.",
+    "Unit tests live in `x/tests.rs` beside the leaf `x.rs` (`#[cfg(test)] mod tests;`); integration tests in each crate's `tests/`.",
+    "Derives are path-qualified (`derive_more::Display`, `strum::Display`, `thiserror::Error`), never imported; errors are thiserror enums."
+  ],
+  "entry_points": [],
+  "fs": [
+    {
+      "name": "adapter-mem/",
+      "role": "an in-memory Telegram behind every port",
+      "node": true
+    },
+    {
+      "name": "application/",
+      "role": "the command engine",
+      "node": true
+    },
+    {
+      "name": "domain/",
+      "role": "the pure-data model and its ports",
+      "node": true
+    }
+  ],
+  "notes": [
+    "An MTProto adapter over forked grammers crates (DD 2026101202 D8) joins here; deny.toml's `allow-git` lists the fork once it exists."
+  ]
+}

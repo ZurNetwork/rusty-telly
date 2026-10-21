@@ -24,6 +24,18 @@ tdesktop, the reference for behaviour and features, is checked out at `../tdeskt
 - A `ChatRef` never carries an access hash, and it resolves only among the user's own dialogs.
 - The `api_id` and `api_hash` are injected at build time and never committed.
 
+## Branch Strategy
+- `main` — stable; the only long-lived branch. All PRs target it. **Never push directly to `main`** (a GitHub ruleset enforces this).
+- `feature/*` — a unit of new work, branched from `main` (e.g. `feature/<ticket>-short-slug`).
+- `bug/*` — a bug fix, branched from `main`.
+- `chore/*`, `docs/*`, `hotfix/*` — maintenance, documentation, and urgent fixes.
+- The repository is jj colocated with git: a branch is a jj bookmark, and work is reviewed by change id from the fork point.
+
+## Commits
+- PRs merge via **Squash and merge** only (other methods are disabled), so `main` keeps **one commit per PR**; the branch itself may carry several granular commits. Merged branches auto-delete.
+- Required CI checks (`format` · `lint` · `test` · `deny` · `boundaries`) must pass before merge.
+- The node tree (`NODE.inf.json` files, `NODE.toml`, `.chartignore`) is committed: re-chart with `/nodes:chart --diff` before a PR so node changes ship with the code they describe.
+
 ## Commands
 
 `just gate` runs everything CI runs (fmt, clippy for native and wasm32, test, cargo-deny, boundaries). `just cli` drives the engine over the in-memory demo account. Dependencies are exact-pinned in `[workspace.dependencies]`, and `Cargo.lock` is committed.

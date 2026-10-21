@@ -1,0 +1,35 @@
+{
+  "path": "crates/domain",
+  "charted": "2026-10-20",
+  "short": "the pure-data model and its ports",
+  "is": "The domain crate: plain value types for chats, messages and users, and the role-named async traits the adapters implement, with no I/O and no workspace dependency.",
+  "type": "code",
+  "tags": [
+    "category:source",
+    "category:schema"
+  ],
+  "conventions": [
+    "`elements` never imports `ports`: tests/elements_do_not_import_ports.rs fails on any `::ports` or `ports::` under src/elements."
+  ],
+  "entry_points": [
+    "src/lib.rs"
+  ],
+  "fs": [
+    {
+      "name": "Cargo.toml",
+      "role": "dependencies: async-trait, derive_more, strum, thiserror",
+      "node": false
+    },
+    {
+      "name": "src/",
+      "role": "elements and ports",
+      "node": true
+    },
+    {
+      "name": "tests/",
+      "role": "the elements-never-import-ports guard",
+      "node": false
+    }
+  ],
+  "notes": []
+}

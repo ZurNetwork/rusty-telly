@@ -1,0 +1,83 @@
+{
+  "path": ".",
+  "charted": "2026-10-20",
+  "short": "Unofficial Telegram clients on one Rust core",
+  "is": "The rusty-telly Cargo workspace: Unofficial Mini Telegram (Limited, browser) and Unofficial Rusty Telegram (Full, desktop) over one ports-and-adapters core, GPL-3.0-or-later.",
+  "type": "code",
+  "tags": [
+    "category:project",
+    "category:source"
+  ],
+  "conventions": [
+    "Dependencies point inward: domain ← application ← adapters and apps; scripts/boundaries.sh fails the gate otherwise.",
+    "Every member carries `[lints] workspace = true`, so `unsafe_code` is forbidden in every crate we write; dependencies may use unsafe.",
+    "Dependencies are exact-pinned in `[workspace.dependencies]` and Cargo.lock is committed; a bump is its own change.",
+    "`just gate` runs everything CI runs: fmt, clippy (native and wasm32), test, cargo-deny, boundaries."
+  ],
+  "entry_points": [
+    "Cargo.toml",
+    "Justfile"
+  ],
+  "fs": [
+    {
+      "name": ".github/",
+      "role": "CI workflow: format, lint, test, deny, boundaries jobs",
+      "node": false
+    },
+    {
+      "name": "Cargo.toml",
+      "role": "workspace: members, pinned dependencies, lints",
+      "node": false
+    },
+    {
+      "name": "Justfile",
+      "role": "gate recipes and `just cli`",
+      "node": false
+    },
+    {
+      "name": "LICENSE",
+      "role": "GPL-3.0 text",
+      "node": false
+    },
+    {
+      "name": "NODE.toml",
+      "role": "settings for the nodes pack",
+      "node": false
+    },
+    {
+      "name": "apps/",
+      "role": "the UIs: cli, mini, rusty",
+      "node": true
+    },
+    {
+      "name": "clippy.toml",
+      "role": "unwrap and expect allowed in tests",
+      "node": false
+    },
+    {
+      "name": "crates/",
+      "role": "the core: domain, application, adapters",
+      "node": true
+    },
+    {
+      "name": "deny.toml",
+      "role": "cargo-deny policy: advisories, licences, bans, sources",
+      "node": false
+    },
+    {
+      "name": "rust-toolchain.toml",
+      "role": "Rust 1.99.0 with the wasm32 target",
+      "node": false
+    },
+    {
+      "name": "scripts/",
+      "role": "boundaries.sh: the dependency rule and the lint-inheritance guard",
+      "node": false
+    }
+  ],
+  "notes": [
+    "To understand a path, load `nodes chain <path>`; `node: false` entries are fully described by their `fs` line.",
+    "Governed by design page 2026101202 (Unofficial Telegram Clients) in the Zurfur design corpus at ~/code/zurfur-design; Rust style follows page 37519361. No refs index is configured, so these pointers live here.",
+    "tdesktop, the reference for behaviour and features, is checked out at ../tdesktop."
+  ]
+}

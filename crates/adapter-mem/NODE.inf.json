@@ -1,0 +1,32 @@
+{
+  "path": "crates/adapter-mem",
+  "charted": "2026-10-20",
+  "short": "an in-memory Telegram",
+  "is": "The in-memory adapter: MemoryTelegram serves every domain port from seeded data, and `fixture::demo` builds a signed-in demo account.",
+  "type": "code",
+  "tags": [
+    "category:source",
+    "category:tests"
+  ],
+  "conventions": [
+    "Single-threaded like the ports it serves: mutable state sits in a RefCell."
+  ],
+  "entry_points": [
+    "src/lib.rs"
+  ],
+  "fs": [
+    {
+      "name": "Cargo.toml",
+      "role": "dependencies: async-trait, domain; dev: pollster",
+      "node": false
+    },
+    {
+      "name": "src/",
+      "role": "telegram.rs (MemoryTelegram and its port impls, tests in telegram/), fixture.rs (demo: direct chat 100, group 200, broadcast channel 300)",
+      "node": false
+    }
+  ],
+  "notes": [
+    "The double in application's tests, and the CLI's account until the MTProto adapter lands."
+  ]
+}

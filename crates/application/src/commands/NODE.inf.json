@@ -1,0 +1,63 @@
+{
+  "path": "crates/application/src/commands",
+  "charted": "2026-10-20",
+  "short": "the PhotoCraft-style command registry",
+  "is": "The registry every UI dispatches through: CommandSpecs with `noun.verb` ids, labels, params, editions, an enabled check and a run body that maps JSON params onto a use case.",
+  "type": "code",
+  "tags": [
+    "category:source"
+  ],
+  "conventions": [
+    "A new command is one CommandSpec row in registry.rs with the editions that offer it, plus a run fn in its namespace leaf; the literal id lists in registry/tests.rs pin each edition's surface.",
+    "Results leave as JSON through `impl From<XResult> for serde_json::Value`, beside the run fn.",
+    "`enabled` reads session state only, never I/O."
+  ],
+  "entry_points": [
+    "registry.rs"
+  ],
+  "fs": [
+    {
+      "name": "auth.rs",
+      "role": "auth.status body and rendering",
+      "node": false
+    },
+    {
+      "name": "chat.rs",
+      "role": "chat.open and chat.current bodies and rendering",
+      "node": false
+    },
+    {
+      "name": "errors.rs",
+      "role": "CommandError, Unavailable, ParamProblem",
+      "node": false
+    },
+    {
+      "name": "message.rs",
+      "role": "message.recent and message.send bodies and rendering",
+      "node": false
+    },
+    {
+      "name": "params.rs",
+      "role": "readers for JSON params",
+      "node": false
+    },
+    {
+      "name": "registry.rs",
+      "role": "the COMMANDS table, for_edition, find, dispatch",
+      "node": false
+    },
+    {
+      "name": "registry/",
+      "role": "tests: each edition's surface, and dispatch end to end over the demo account",
+      "node": false
+    },
+    {
+      "name": "spec.rs",
+      "role": "CommandSpec and CommandFuture",
+      "node": false
+    }
+  ],
+  "notes": [
+    "Limited is offered no `chat.open`: a command an edition lacks does not exist there."
+  ]
+}
