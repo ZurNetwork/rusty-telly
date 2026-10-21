@@ -1,0 +1,5 @@
+/target
+
+# The api_id and api_hash are injected at build time and never committed (DD 2026101202).
+.env
+.env.*

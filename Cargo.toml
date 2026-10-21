@@ -1,0 +1,39 @@
+[workspace]
+resolver = "3"
+members = ["crates/*", "apps/*"]
+
+[workspace.package]
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.99"
+license = "GPL-3.0-or-later"
+publish = false
+
+[workspace.dependencies]
+# internal
+domain = { path = "crates/domain" }
+application = { path = "crates/application" }
+adapter-mem = { path = "crates/adapter-mem" }
+
+# external — exact pins; bump on purpose, in its own change.
+# `?Send` port traits: in the browser no future is `Send`.
+async-trait = "=0.1.92"
+# Derives only: each crate turns on the derives it uses.
+derive_more = "=2.1.1"
+# The command registry's params and results.
+serde_json = "=1.0.154"
+strum = { version = "=0.28.0", features = ["derive"] }
+thiserror = "=2.0.21"
+# Drives a future to completion without a runtime: tests and the CLI.
+pollster = "=1.0.1"
+
+# DD 2026101202 D7: every crate we write forbids unsafe; dependencies may use it.
+# `scripts/boundaries.sh` fails when a member does not inherit these lints.
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+dbg_macro = "warn"
+todo = "warn"
+unwrap_used = "warn"
+expect_used = "warn"

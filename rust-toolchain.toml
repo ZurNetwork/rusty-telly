@@ -1,0 +1,6 @@
+# One Rust version for every machine and for CI, so the local gate and CI agree.
+# Bump it on purpose, in its own change. wasm32 is Mini Telegram's target.
+[toolchain]
+channel = "1.99.0"
+components = ["rustfmt", "clippy"]
+targets = ["wasm32-unknown-unknown"]

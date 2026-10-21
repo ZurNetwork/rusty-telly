@@ -1,0 +1,19 @@
+[package]
+name = "adapter-mem"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+# An in-memory Telegram behind every port: the double for tests, and the CLI's
+# account until the MTProto adapter (forked grammers, DD 2026101202 D8) lands.
+[dependencies]
+async-trait = { workspace = true }
+domain = { workspace = true }
+
+[dev-dependencies]
+pollster = { workspace = true }
+
+[lints]
+workspace = true

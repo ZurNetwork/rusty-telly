@@ -1,0 +1,37 @@
+# `cargo deny check advisories licenses bans sources` — part of `just gate` and CI.
+
+[graph]
+all-features = false
+
+[advisories]
+ignore = []
+
+[licenses]
+# Dependencies only: our own crates are GPL-3.0-or-later and `publish = false`,
+# so `licenses.private` skips them. GPL-3.0-or-later can take code under any of these.
+allow = [
+    "MIT",
+    "Apache-2.0",
+    "Apache-2.0 WITH LLVM-exception",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "ISC",
+    "Unicode-3.0",
+    "Zlib",
+]
+confidence-threshold = 0.8
+
+[licenses.private]
+ignore = true
+
+[bans]
+multiple-versions = "warn"
+wildcards = "deny"
+allow-wildcard-paths = true
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]
+# The forked grammers crates (DD 2026101202 D8) go here once the fork exists.
+allow-git = []

@@ -1,0 +1,20 @@
+[package]
+name = "cli"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+# A third, command-line UI over the same command engine: the proof point that
+# Telegram reads through the same commands (DD 2026101202, objective 5). The
+# composition root: it picks the adapter.
+[dependencies]
+adapter-mem = { workspace = true }
+application = { workspace = true }
+pollster = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+
+[lints]
+workspace = true

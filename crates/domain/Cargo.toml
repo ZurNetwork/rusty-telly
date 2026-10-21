@@ -1,0 +1,18 @@
+[package]
+name = "domain"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+# The pure-data model and the ports it is served through. No I/O, and no
+# workspace dependency: everything else points at this crate, never the reverse.
+[dependencies]
+async-trait = { workspace = true }
+derive_more = { workspace = true, features = ["as_ref", "display", "from", "from_str"] }
+strum = { workspace = true }
+thiserror = { workspace = true }
+
+[lints]
+workspace = true
